@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Implement {
     String[] prepares;
+
+        //자동차 이름 입력
     public String[] createNames(){
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분");
         String[] carNames = Console.readLine().split(",");
@@ -16,6 +18,8 @@ public class Implement {
         }
         return carNames;
     }
+
+        //횟수 입력
     public int getCount(){
         int count = 0 ;
         System.out.println("시도할 회수는 몇회인가요?");
@@ -30,14 +34,7 @@ public class Implement {
         return count;
     }
 
-    public String[] prepare(String[] carNames){
-        prepares = new String[carNames.length];
-        for (int i = 0; i < carNames.length; i++) {
-            prepares[i] = carNames[i] + " : ";
-        }
-        return prepares;
-    }
-
+        //전진, 정지 동작
     public int[] runStop(String[] prepares){
         int[] positions = new int[prepares.length];
         for (int i = 0; i< prepares.length; i++){
@@ -49,12 +46,15 @@ public class Implement {
         return positions;
     }
 
-    public void printStatus(String[] prepares, int[] position){
-        for (int i = 0; i < prepares.length; i++) {
-            updatePrepare(prepares, position, i);
+        //출력 형태 맞추기
+    public void prepare(String[] carNames){
+        prepares = new String[carNames.length];
+        for (int i = 0; i < carNames.length; i++) {
+            prepares[i] = carNames[i] + " : ";
         }
     }
 
+        //이동 상황 업데이트
     private void updatePrepare(String[] prepares, int[] position, int index){
         for (int j = 0; j < 1; j++) {
             if (position[index] > 0) {
@@ -64,7 +64,14 @@ public class Implement {
         }
     }
 
+        //이동 상태 출력
+    public void printStatus(String[] prepares, int[] position){
+        for (int i = 0; i < prepares.length; i++) {
+            updatePrepare(prepares, position, i);
+        }
+    }
 
+        //경주 결과 출력
     public void racingresult(int count){
         for(int i = 0; i < count; i++){
             printStatus(prepares, runStop(prepares));
@@ -74,7 +81,7 @@ public class Implement {
 
 
 
-
+        //우승자 결정
     public void decisionWinner(){
         int maxLength = 0;
         ArrayList<String> winners = new ArrayList<>();
@@ -102,5 +109,12 @@ public class Implement {
                 System.out.print(", ");
             }
         }
+    }
+
+        //최종 함수
+    public void racingGame(){
+        prepare(createNames());
+        racingresult(getCount());
+        decisionWinner();
     }
 }
