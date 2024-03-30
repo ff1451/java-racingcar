@@ -1,6 +1,8 @@
 package racingcar;
+
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
 
 public class Implement {
     String[] prepares;
@@ -28,7 +30,7 @@ public class Implement {
         return count;
     }
 
-    public String[] prepare(String[] carNames) {
+    public String[] prepare(String[] carNames){
         prepares = new String[carNames.length];
         for (int i = 0; i < carNames.length; i++) {
             prepares[i] = carNames[i] + " : ";
@@ -47,16 +49,13 @@ public class Implement {
         return positions;
     }
 
-    //public void status(String[] prepares, int[] position){
-        //if()
-    //}
-    public void printStatus(String[] prepares, int[] position) {
+    public void printStatus(String[] prepares, int[] position){
         for (int i = 0; i < prepares.length; i++) {
             updatePrepare(prepares, position, i);
         }
     }
 
-    private void updatePrepare(String[] prepares, int[] position, int index) {
+    private void updatePrepare(String[] prepares, int[] position, int index){
         for (int j = 0; j < 1; j++) {
             if (position[index] > 0) {
                 prepares[index] += "-";
@@ -66,7 +65,7 @@ public class Implement {
     }
 
 
-    public void racing(String[] prepares, int count){
+    public void racingresult(int count){
         for(int i = 0; i < count; i++){
             printStatus(prepares, runStop(prepares));
             System.out.println();
@@ -75,4 +74,33 @@ public class Implement {
 
 
 
+
+    public void decisionWinner(){
+        int maxLength = 0;
+        ArrayList<String> winners = new ArrayList<>();
+
+            // 가장 긴 길이 찾기
+        for (String prepared : prepares) {
+            int length = prepared.length();
+            if (length > maxLength) {
+                maxLength = length;
+            }
+        }
+
+            // 가장 긴 길이를 가진 인덱스의 값을 우승자로 선택
+        for (int i = 0; i < prepares.length; i++) {
+            if (prepares[i].length() == maxLength) {
+                winners.add(prepares[i].replace(" : ", "").replace("-", ""));
+            }
+        }
+
+            // 우승자 출력
+        System.out.print("최종 우승자 : ");
+        for (int i = 0; i < winners.size(); i++) {
+            System.out.print(winners.get(i));
+            if (i != winners.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+    }
 }
