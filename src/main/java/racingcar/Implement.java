@@ -1,12 +1,12 @@
 package racingcar;
 
 import camp.nextstep.edu.missionutils.Console;
-import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Implement {
+    static int racingCount;
     List<Car> cars = new ArrayList<>();
 
     //자동차 이름 입력
@@ -30,21 +30,21 @@ public class Implement {
 
     //횟수 입력
     public int getRacingCount() {
-        int count = 0;
+        racingCount = 0;
         System.out.println("시도할 회수는 몇회인가요?");
         try {
-            count = Integer.parseInt(Console.readLine());
+            racingCount = Integer.parseInt(Console.readLine());
         } catch (NumberFormatException e) {
             System.out.println("유효하지 않은 숫자가 입력되었습니다.");
         }
-        if (count < 1) {
+        if (racingCount < 1) {
             throw new IllegalArgumentException("1이상의 횟수를 입력해야합니다.");
         }
-        return count;
+        return racingCount;
     }
 
     //전진, 정지 동작
-    private void runStop(String[] prepares) {
+    private void runStop() {
         for (Car car : cars) {
             car.move();
         }
@@ -58,9 +58,10 @@ public class Implement {
     }
 
     //경주 결과 출력
-    public void racingresult(int count) {
-        for (int i = 0; i < count; i++) {
-            printStatus(prepares, runStop(prepares));
+    public void racingResult() {
+        for (int i = 0; i < racingCount; i++) {
+            runStop();
+            printStatus();
             System.out.println();
         }
     }
@@ -98,7 +99,7 @@ public class Implement {
     //최종 함수
     public void racingGame() {
         prepare(createCarNames());
-        racingresult(getRacingCount());
+        racingResult(getRacingCount());
         decisionWinner();
     }
 }
