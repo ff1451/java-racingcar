@@ -87,15 +87,16 @@ public class Implement {
         }
 
         // 우승자 출력
-        System.out.print("최종 우승자 : ");
         String result = String.join(", ", winners);
+        System.out.printf("최종 우승자 : %s", result);
+
     }
-
-
+    
     //최종 함수
     public void racingGame() {
-        prepare(createCarNames());
-        racingResult(getRacingCount());
+        createCarNames();
+        getRacingCount();
+        racingResult();
         decisionWinner();
     }
 }
