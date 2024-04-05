@@ -3,7 +3,7 @@ package racingcar;
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        Implement game = new Implement();
+        RacingManager game = new RacingManager();
         try {
             game.racingGame();
         } catch (Exception e) {
