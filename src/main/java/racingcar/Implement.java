@@ -14,11 +14,18 @@ public class Implement {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분");
         String[] carNames = Console.readLine().split(",");
         for (String name : carNames) {
-            if (name.length() >= 6) {
-                throw new IllegalArgumentException("자동차 이름은 5자까지만 가능합니다.");
+            if (isNameValid(name)) {
+                cars.add(new Car(name));
             }
-            cars.add(new Car(name));
         }
+    }
+
+    //자동차 이름 길이 판정
+    private boolean isNameValid(String name) {
+        if (name.length() >= 6) {
+            throw new IllegalArgumentException("자동차 이름은 5자까지만 가능합니다.");
+        }
+        return true;
     }
 
     //횟수 입력
@@ -37,19 +44,14 @@ public class Implement {
     }
 
     //전진, 정지 동작
-    public int[] runStop(String[] prepares) {
-        int[] positions = new int[prepares.length];
-        for (int i = 0; i < prepares.length; i++) {
-            int random = Randoms.pickNumberInRange(0, 9);
-            if (random >= 4) {
-                positions[i] += 1;
-            }
+    private void runStop(String[] prepares) {
+        for (Car car : cars) {
+            car.move();
         }
-        return positions;
     }
 
     //출력 형태 맞추기
-    public void prepare(String[] carNames) {
+    private void prepare(String[] carNames) {
         prepares = new String[carNames.length];
         for (int i = 0; i < carNames.length; i++) {
             prepares[i] = carNames[i] + " : ";
