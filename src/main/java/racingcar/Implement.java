@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 public class Implement {
     static int racingCount;
@@ -68,33 +69,28 @@ public class Implement {
 
     //우승자 결정
     public void decisionWinner() {
-        int maxLength = 0;
-        ArrayList<String> winners = new ArrayList<>();
+        int maxPosition = 0;
+        List<String> winners = new ArrayList<>();
 
-        // 가장 긴 길이 찾기
-        for (String prepared : prepares) {
-            int length = prepared.length();
-            if (length > maxLength) {
-                maxLength = length;
-            }
-        }
+        Iterator<Car> iterator = cars.iterator();
+        while (iterator.hasNext()) {
+            Car car = iterator.next();
+            int resultPosition = car.getPosition();
 
-        // 가장 긴 길이를 가진 인덱스의 값을 우승자로 선택
-        for (int i = 0; i < prepares.length; i++) {
-            if (prepares[i].length() == maxLength) {
-                winners.add(prepares[i].replace(" : ", "").replace("-", ""));
+            if (resultPosition > maxPosition) {
+                maxPosition = resultPosition;
+                winners.clear();
+                winners.add(car.getCarName());
+            } else if (resultPosition == maxPosition ){
+                winners.add(car.getCarName());
             }
         }
 
         // 우승자 출력
         System.out.print("최종 우승자 : ");
-        for (int i = 0; i < winners.size(); i++) {
-            System.out.print(winners.get(i));
-            if (i != winners.size() - 1) {
-                System.out.print(", ");
-            }
-        }
+        String result = String.join(", ", winners);
     }
+
 
     //최종 함수
     public void racingGame() {
