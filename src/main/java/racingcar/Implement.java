@@ -22,7 +22,7 @@ public class Implement {
     }
 
     //횟수 입력
-    public int getCount() {
+    public int getRacingCount() {
         int count = 0;
         System.out.println("시도할 회수는 몇회인가요?");
         try {
@@ -114,7 +114,7 @@ public class Implement {
     //최종 함수
     public void racingGame() {
         prepare(createCarNames());
-        racingresult(getCount());
+        racingresult(getRacingCount());
         decisionWinner();
     }
 }
