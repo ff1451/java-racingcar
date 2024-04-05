@@ -50,28 +50,10 @@ public class Implement {
         }
     }
 
-    //출력 형태 맞추기
-    private void prepare(String[] carNames) {
-        prepares = new String[carNames.length];
-        for (int i = 0; i < carNames.length; i++) {
-            prepares[i] = carNames[i] + " : ";
-        }
-    }
-
-    //이동 상황 업데이트
-    private void updatePrepare(String[] prepares, int[] position, int index) {
-        for (int j = 0; j < 1; j++) {
-            if (position[index] > 0) {
-                prepares[index] += "-";
-            }
-            System.out.println(prepares[index]);
-        }
-    }
-
     //이동 상태 출력
-    public void printStatus(String[] prepares, int[] position) {
-        for (int i = 0; i < prepares.length; i++) {
-            updatePrepare(prepares, position, i);
+    private void printStatus() {
+        for (Car car : cars) {
+            System.out.println(car.getCarName() + " : " + "-".repeat(car.getPosition()));
         }
     }
 
